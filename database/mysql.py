@@ -1,7 +1,7 @@
 import pymysql
 
 
-class MysqlDb():
+class MysqlDb:
     """Management of a connection to the database
 
     Args:
@@ -11,22 +11,34 @@ class MysqlDb():
         password: password to use
         database: database to use
     """
-    def __init__(self, host, port, user, password, database):
+
+    def __init__(self, host: str, port: int, user: str, password: str, database: str):
         # connect to the database
         self.conn = pymysql.connect(
-            host=host,
-            port=port,
-            user=user,
-            password=password,
-            database=database
+            host=host, port=port, user=user, password=password, database=database
         )
         self.cur = self.conn.cursor(cursor=pymysql.cursors.DictCursor)
 
-    def __del__(self): # 对象资源被释放时触发，在对象即将被删除时的最后操作
+    def __del__(self):
         # close the cursor
         self.cur.close()
         # close the connection to the database
         self.conn.close()
+
+    def init(self, schema_path: str):
+        """Initialize the database
+
+        Args:
+            schema_path: path of the schema file
+        """
+        with open(schema_path, "r") as f:
+            # read the schema file
+            schema = f.read()
+            commands = schema.split(";")
+            # execute the sql statement
+            for command in commands:
+                self.cur.execute(command)
+            self.conn.commit()
 
     def query(self, sql):
         """Query
