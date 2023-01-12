@@ -1,5 +1,5 @@
 import pymysql
-
+from typing import Union
 
 class MysqlDb:
     """Management of a connection to the database
@@ -25,11 +25,12 @@ class MysqlDb:
         # close the connection to the database
         self.conn.close()
 
-    def init(self, schema_path: str):
+    def init(self, schema_path: str, test_data: Union[str, None] = None):
         """Initialize the database
 
         Args:
             schema_path: path of the schema file
+            test_data: path of the test data file to insert, None to not insert
         """
         with open(schema_path, "r") as f:
             # read the schema file
@@ -40,7 +41,17 @@ class MysqlDb:
                 self.cur.execute(command)
             self.conn.commit()
 
-    def query(self, sql):
+        if test_data is not None:
+            with open(test_data, "r") as f:
+                # read the test data file
+                data = f.read()
+                commands = data.split(";")
+                # execute the sql statement
+                for command in commands:
+                    self.cur.execute(command)
+                self.conn.commit()
+
+    def query(self, sql: str):
         """Query
 
         Args:
