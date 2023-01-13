@@ -8,7 +8,7 @@ INFO_LEN = 100
 
 class Brand(db.Model):
     bid = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(NAME_LEN), nullable=False)
+    name = db.Column(db.String(NAME_LEN), nullable=False, unique=True)
 
 class Model(db.Model):
     mid = db.Column(db.Integer, primary_key=True)
@@ -55,7 +55,7 @@ class Vehicle(db.Model):
 
 class Dealer(db.Model):
     did = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(NAME_LEN), nullable=False)
+    name = db.Column(db.String(NAME_LEN), nullable=False, unique=True)
     country = db.Column(db.String(NAME_LEN))
     city = db.Column(db.String(NAME_LEN))
     brands = db.relationship("Brand", backref="dealers", secondary="sells")
@@ -117,3 +117,12 @@ class Manufactures(db.Model):
 class Sells(db.Model):
     did = db.Column(db.Integer, db.ForeignKey("dealer.did", ondelete="CASCADE"), primary_key=True)
     bid = db.Column(db.Integer, db.ForeignKey("brand.bid", ondelete="CASCADE"), primary_key=True)
+
+class QueryRecord(db.Model):
+    bid = db.Column(db.Integer, db.ForeignKey("brand.bid"), primary_key=True)
+    mid = db.Column(db.Integer, db.ForeignKey("model.mid"), primary_key=True)
+    color = db.Column(db.String(INFO_LEN), primary_key=True)
+    engine = db.Column(db.String(INFO_LEN), primary_key=True)
+    transmission = db.Column(db.String(INFO_LEN), primary_key=True)
+    date = db.Column(db.Date, primary_key=True)
+    count = db.Column(db.Integer, nullable=False)

@@ -33,6 +33,12 @@ def import_test_data(
     etc = json.load(open(etc_path, "r"))
     colors, engines, transmissions, parts, vins, body_styles = etc.values()
 
+    # generate random vins
+    alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789'
+    for _ in range(200):
+        vins += ''.join(random.sample(alphabet, 19))
+    vins = set(vins)
+
     max_mid = 0
     generated_parts = set()
     assembly_plant = set()

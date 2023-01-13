@@ -1,6 +1,9 @@
+from flask import redirect, url_for
+
 import website
 from database import db
 from database.import_data import import_test_data
+
 
 if __name__ == "__main__":
     app = website.create_app(db)
