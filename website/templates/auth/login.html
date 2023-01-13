@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}登录{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <label for="role">身份：</label>
+    <nobr>
+        <input type="radio" name="role" value="customer" required>客户
+        <input type="radio" name="role" value="dealer" required>经销商
+        <input type="radio" name="role" value="marketing" required>市场部
+    </nobr>
+    <br>
+    <label for="username">用户名：</label>
+    <input name="username" id="username" required>
+    <br>
+    <label for="password">密码：</label>
+    <input type="password" name="password" id="password" required>
+    <br>
+    <input type="submit" value="登录">
+</form>
+{% endblock %}

@@ -1,2 +1,9 @@
-from .models import *
-from .import_data import import_test_data
+from flask_sqlalchemy import SQLAlchemy
+
+
+__all__ = [
+    "models",
+    "import_data"
+]
+
+db = SQLAlchemy()

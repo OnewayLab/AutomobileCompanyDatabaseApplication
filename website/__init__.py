@@ -28,4 +28,8 @@ def create_app(db):
     except OSError:
         pass
 
+    # register blueprints
+    from . import auth
+    app.register_blueprint(auth.bp)
+    
     return app
