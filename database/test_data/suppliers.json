@@ -1,0 +1,104 @@
+[
+    {
+        "name": "Supplier 1",
+        "country": "USA",
+        "city": "New York",
+        "street": "1st Avenue"
+    },
+    {
+        "name": "Supplier 2",
+        "country": "USA",
+        "city": "Los Angeles",
+        "street": "2nd Avenue"
+    },
+    {
+        "name": "Supplier 3",
+        "country": "USA",
+        "city": "Chicago",
+        "street": "3rd Avenue"
+    },
+    {
+        "name": "Supplier 4",
+        "country": "China",
+        "city": "Beijing",
+        "street": "1st Street"
+    },
+    {
+        "name": "Supplier 5",
+        "country": "China",
+        "city": "Shanghai",
+        "street": "2nd Street"
+    },
+    {
+        "name": "Supplier 6",
+        "country": "China",
+        "city": "Shenzhen",
+        "street": "3rd Street"
+    },
+    {
+        "name": "Supplier 7",
+        "country": "Germany",
+        "city": "Berlin",
+        "street": "1st Street"
+    },
+    {
+        "name": "Supplier 8",
+        "country": "Germany",
+        "city": "Hamburg",
+        "street": "2nd Street"
+    },
+    {
+        "name": "Supplier 9",
+        "country": "Germany",
+        "city": "Munich",
+        "street": "3rd Street"
+    },
+    {
+        "name": "Supplier 10",
+        "country": "Japan",
+        "city": "Tokyo",
+        "street": "1st Street"
+    },
+    {
+        "name": "Supplier 11",
+        "country": "Japan",
+        "city": "Osaka",
+        "street": "2nd Street"
+    },
+    {
+        "name": "Supplier 12",
+        "country": "Japan",
+        "city": "Nagoya",
+        "street": "3rd Street"
+    },
+    {
+        "name": "Supplier 13",
+        "country": "Russia",
+        "city": "Moscow",
+        "street": "1st Street"
+    },
+    {
+        "name": "Supplier 14",
+        "country": "Russia",
+        "city": "Saint Petersburg",
+        "street": "2nd Street"
+    },
+    {
+        "name": "Supplier 15",
+        "country": "Russia",
+        "city": "Novosibirsk",
+        "street": "3rd Street"
+    },
+    {
+        "name": "Supplier 16",
+        "country": "India",
+        "city": "Mumbai",
+        "street": "1st Street"
+    },
+    {
+        "name": "Supplier 17",
+        "country": "India",
+        "city": "Delhi",
+        "street": "2nd Street"
+    }
+]

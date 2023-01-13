@@ -1,0 +1,72 @@
+{
+    "color": [
+        "black",
+        "white",
+        "red",
+        "blue",
+        "gray",
+        "yellow",
+        "green",
+        "orange",
+        "purple",
+        "brown"
+    ],
+    "engine": [
+        "V4",
+        "V6",
+        "V8"
+    ],
+    "transmission": [
+        "automatic",
+        "manual"
+    ],
+    "part": [
+        "body",
+        "engine",
+        "transmission",
+        "interior",
+        "wheels",
+        "tires",
+        "brakes",
+        "suspension",
+        "electrical"
+    ],
+    "vin": [
+        "1GYS4CKJ9FR555555",
+        "1FTPX14VX8KE92734",
+        "1GCEK19B74Z293948",
+        "2GCEK19B74Z293948",
+        "3GCEK19B74Z293948",
+        "4GCEK19B74Z293948",
+        "5GCEK19B74Z293948",
+        "1J4FT48SX5L283743",
+        "1N4AA5AP5BC812005",
+        "1ZVFT80N965139896",
+        "3FADP4EJ8DM127896",
+        "3FADP4EJ8DM127897",
+        "3FADP4EJ8DM127898",
+        "3FADP4EJ8DM127899",
+        "3FADP4EJ8DM127900",
+        "3FADP4EJ8DM127901",
+        "3FADP4EJ8DM127902",
+        "4S4BSANC9G3279826",
+        "5NPE34AF7GH363472",
+        "1FTFW1EF6EKD37344",
+        "1C4RJEAG1FC611751",
+        "1C4RJEAG1FC611752",
+        "1C4RJEAG1FC611753",
+        "1C4RJEAG1FC611754"
+    ],
+    "body_style": [
+        "sedan",
+        "coupe",
+        "hatchback",
+        "wagon",
+        "convertible",
+        "suv",
+        "truck",
+        "van",
+        "minivan",
+        "other"
+    ]
+}

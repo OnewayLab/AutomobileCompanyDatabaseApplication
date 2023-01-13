@@ -1,0 +1,114 @@
+[
+        {
+            "name": "Plant 1",
+            "work_type": "assembly",
+            "country": "USA",
+            "city": "New York",
+            "street": "1st Avenue"
+        },
+        {
+            "name": "Plant 2",
+            "work_type": "manufacturing",
+            "country": "USA",
+            "city": "Los Angeles",
+            "street": "2nd Avenue"
+        },
+        {
+            "name": "Plant 3",
+            "work_type": "assembly",
+            "country": "USA",
+            "city": "Chicago",
+            "street": "3rd Avenue"
+        },
+        {
+            "name": "Plant 4",
+            "work_type": "assembly",
+            "country": "China",
+            "city": "Beijing",
+            "street": "1st Street"
+        },
+        {
+            "name": "Plant 5",
+            "work_type": "assembly",
+            "country": "China",
+            "city": "Shanghai",
+            "street": "2nd Street"
+        },
+        {
+            "name": "Plant 6",
+            "work_type": "manufacturing",
+            "country": "China",
+            "city": "Shenzhen",
+            "street": "3rd Street"
+        },
+        {
+            "name": "Plant 7",
+            "work_type": "manufacturing",
+            "country": "Germany",
+            "city": "Berlin",
+            "street": "1st Street"
+        },
+        {
+            "name": "Plant 8",
+            "work_type": "assembly",
+            "country": "Germany",
+            "city": "Hamburg",
+            "street": "2nd Street"
+        },
+        {
+            "name": "Plant 9",
+            "work_type": "manufacturing",
+            "country": "Germany",
+            "city": "Munich",
+            "street": "3rd Street"
+        },
+        {
+            "name": "Plant 10",
+            "work_type": "manufacturing",
+            "country": "Japan",
+            "city": "Tokyo",
+            "street": "1st Street"
+        },
+        {
+            "name": "Plant 11",
+            "work_type": "manufacturing",
+            "country": "Japan",
+            "city": "Osaka",
+            "street": "2nd Street"
+        },
+        {
+            "name": "Plant 12",
+            "work_type": "assembly",
+            "country": "Japan",
+            "city": "Nagoya",
+            "street": "3rd Street"
+        },
+        {
+            "name": "Plant 13",
+            "work_type": "manufacturing",
+            "country": "Russia",
+            "city": "Moscow",
+            "street": "1st Street"
+        },
+        {
+            "name": "Plant 14",
+            "work_type": "assembly",
+            "country": "Russia",
+            "city": "Saint Petersburg",
+            "street": "2nd Street"
+        },
+        {
+            "name": "Plant 15",
+            "work_type": "manufacturing",
+            "country": "Russia",
+            "city": "Novosibirsk",
+            "street": "3rd Street"
+        },
+        {
+            "name": "Plant 16",
+            "work_type": "assembly",
+            "country": "India",
+            "city": "Mumbai",
+            "street": "1st Street"
+        }
+    ]

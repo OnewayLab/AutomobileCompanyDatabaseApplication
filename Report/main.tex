@@ -161,9 +161,10 @@ E-R 图中的联系集以及对应的映射基数和参与约束解释如下：
     \item \textit{made\_of}：关联\textit{Vehicle}和\textit{Part}，表示一辆汽车由哪些部件组装成，描述属性\textit{manufacturer}和\textit{manu\_date(year, month, day)}分别表示该部件的制造商和制造日期，其中制造日期是一个复合属性，每辆汽车都是由部件构成的，但是一个部件未必已经装在一辆汽车上；
     \item \textit{assembles}：关联\textit{Plant}和\textit{Vehicle}，表示汽车是由哪个工厂组装的，描述属性\textit{assem\_data(year, month, day)}表示组装日期，每辆汽车都是在工厂中组装的，但是有的工厂可能不组装汽车；
     \item \textit{vehicle\_op}：关联\textit{Vehicle}和\textit{Option}，表示汽车属于哪种车型和选项组合，每辆汽车都属于一种选项组合，而一种选项组合可能有多辆汽车；
+    \item \textit{sells}：关联\textit{Dealer}和\textit{Brand}，表示经销商销售哪些品牌的汽车；
     \item \textit{inventory}：关联\textit{Dealer}和\textit{Vehicle}，表示经销商的进货记录，描述属性\textit{date}和\textit{is\_sold}和分别表示该汽车的进货日期和是否已经卖出；
     \item \textit{sales}：关联\textit{Brand}、\textit{Model}和\textit{Dealer}，表示某个品牌和车型的某种颜色的车在某个经销商处某一天的销量；
-    \item \textit{sell}：关联\textit{Dealer}、\textit{Vehicle}和\textit{Customer}，表示某个经销商在某一天把某辆汽车卖给了某个客户。
+    \item \textit{deal}：关联\textit{Dealer}、\textit{Vehicle}和\textit{Customer}，表示某个经销商在某一天把某辆汽车卖给了某个客户。
 \end{itemize}
 
 \subsection{关系模式}
@@ -192,9 +193,10 @@ E-R 图中的联系集以及对应的映射基数和参与约束解释如下：
         made\_of(\underline{VIN}, \underline{part\_model}, manufacturer, year, monty, day)\\
         assembles(\underline{VIN}, plant\_name)\\
         vehicle\_op(\underline{VIN}, \underline{MID}, \underline{color}, \underline{engine}, \underline{transmission})\\
+        sells(\underline{DID}, \underline{BID})\\
         inventory(\underline{VIN}, DID, year, monty, day, is\_sold)\\
         sales(\underline{BID}, \underline{MID}, \underline{color} \underline{DID}, \underline{year}, \underline{monty}, \underline{day}, quantity)\\
-        sells(\underline{VIN}, DID, CID, year, monty, day)
+        deal(\underline{VIN}, DID, CID, year, monty, day)
     \end{tabular}
 \end{center}
 
@@ -218,9 +220,10 @@ E-R 图中的联系集以及对应的映射基数和参与约束解释如下：
         supplies(\underline{supplier\_name}, \underline{part\_model})\\
         manufactures(\underline{plant\_name}, \underline{part\_model})\\
         made\_of(\underline{VIN}, \underline{part\_model}, manufacturer, year, monty, day)\\
+        sells(\underline{DID}, \underline{BID})\\
         inventory(\underline{VIN}, DID, year, month, day, is\_sold)\\
         sales(\underline{BID}, \underline{MID}, \underline{color}, \underline{DID}, \underline{year}, \underline{monty}, \underline{day}, quantity)\\
-        sells(\underline{VIN}, DID, CID, year, monty, day)
+        deal(\underline{VIN}, DID, CID, year, monty, day)
     \end{tabular}
 \end{center}
 

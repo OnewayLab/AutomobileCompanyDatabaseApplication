@@ -1,0 +1,62 @@
+[
+    {
+        "did": 1,
+        "name": "AutoNation",
+        "country": "USA",
+        "city": "Fort Lauderdale"
+    },
+    {
+        "did": 2,
+        "name": "CarMax",
+        "country": "USA",
+        "city": "Richmond"
+    },
+    {
+        "did": 3,
+        "name": "Penske Automotive Group",
+        "country": "USA",
+        "city": "Troy"
+    },
+    {
+        "did": 4,
+        "name": "Sonic Automotive",
+        "country": "USA",
+        "city": "Charlotte"
+    },
+    {
+        "did": 5,
+        "name": "Asbury Automotive Group",
+        "country": "USA",
+        "city": "Jacksonville"
+    },
+    {
+        "did": 6,
+        "name": "Lithia Motors",
+        "country": "USA",
+        "city": "Medford"
+    },
+    {
+        "did": 7,
+        "name": "Group 1 Automotive",
+        "country": "USA",
+        "city": "Houston"
+    },
+    {
+        "did": 8,
+        "name": "Van Tuyl Group",
+        "country": "USA",
+        "city": "San Diego"
+    },
+    {
+        "did": 9,
+        "name": "Victory Automotive Group",
+        "country": "USA",
+        "city": "Houston"
+    },
+    {
+        "did": 10,
+        "name": "Ken Garff Automotive Group",
+        "country": "USA",
+        "city": "Salt Lake City"
+    }
+]

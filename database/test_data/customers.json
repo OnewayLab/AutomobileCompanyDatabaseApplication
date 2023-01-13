@@ -1,0 +1,102 @@
+[
+    {
+        "cid": 1,
+        "name": "John Smith",
+        "country": "United States",
+        "city": "New York",
+        "street": "123 Main St",
+        "gender": "Male",
+        "annual_income": 75000,
+        "phone": [
+            "555-555-5555",
+            "555-555-5556"
+        ]
+    },
+    {
+        "cid": 2,
+        "name": "Jane Doe",
+        "country": "Canada",
+        "city": "Toronto",
+        "street": "456 Park Ave",
+        "gender": "Female",
+        "annual_income": 60000,
+        "phone": [
+            "555-555-5557",
+            "555-555-5558"
+        ]
+    },
+    {
+        "cid": 3,
+        "name": "Bob Johnson",
+        "country": "United Kingdom",
+        "city": "London",
+        "street": "789 Oxford St",
+        "gender": "Male",
+        "annual_income": 90000,
+        "phone": [
+            "555-555-5559"
+        ]
+    },
+    {
+        "cid": 4,
+        "name": "Emily Davis",
+        "country": "Australia",
+        "city": "Sydney",
+        "street": "321 Pitt St",
+        "gender": "Female",
+        "annual_income": 55000,
+        "phone": [
+            "555-555-5560",
+            "555-555-5561"
+        ]
+    },
+    {
+        "cid": 5,
+        "name": "Michael Brown",
+        "country": "United States",
+        "city": "Los Angeles",
+        "street": "654 Hollywood Blvd",
+        "gender": "Male",
+        "annual_income": 80000,
+        "phone": [
+            "555-555-5562"
+        ]
+    },
+    {
+        "cid": 6,
+        "name": "Sarah Miller",
+        "country": "Canada",
+        "city": "Vancouver",
+        "street": "987 Granville St",
+        "gender": "Female",
+        "annual_income": 65000,
+        "phone": [
+            "555-555-5563"
+        ]
+    },
+    {
+        "cid": 7,
+        "name": "David Wilson",
+        "country": "United Kingdom",
+        "city": "Manchester",
+        "street": "246 Market St",
+        "gender": "Male",
+        "annual_income": 75000,
+        "phone": [
+            "555-555-5564",
+            "555-555-5565"
+        ]
+    },
+    {
+        "cid": 8,
+        "name": "Jessica Moore",
+        "country": "Australia",
+        "city": "Brisbane",
+        "street": "369 Queen St",
+        "gender": "Female",
+        "annual_income": 60000,
+        "phone": [
+            "555-555-5566"
+        ]
+    }
+]
