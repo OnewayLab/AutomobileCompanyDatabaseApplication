@@ -14,6 +14,8 @@ def vehicle_shop():
         session["selected_color"] = None
         session["selected_engine"] = None
         session["selected_transmission"] = None
+        session["selected_dealer_country"] = None
+        session["selected_dealer_city"] = None
     else:
         if "forDealers" in request.form:
             dealers = get_vehicles(
@@ -53,6 +55,14 @@ def vehicle_shop():
             session["selected_transmission"] = (
                 transmission if transmission != "any" else None
             )
+            if request.form["dealer_country"] == "any":
+                session["selected_dealer_country"] = None
+            else:
+                session["selected_dealer_country"] = request.form["dealer_country"]
+            if request.form["dealer_city"] == "any":
+                session["selected_dealer_city"] = None
+            else:
+                session["selected_dealer_city"] = request.form["dealer_city"]
 
     # get brand names
     brands = Brand.query.all()
@@ -73,6 +83,19 @@ def vehicle_shop():
     colors = list({option.color for option in options})
     engines = list({option.engine for option in options})
     transmissions = list({option.transmission for option in options})
+
+    # get dealer coutnries
+    dealer_countries = Dealer.query.with_entities(Dealer.country).distinct().all()
+    dealer_countries = [country[0] for country in dealer_countries]
+
+    # get dealer cities
+    if session["selected_dealer_country"]:
+        dealer_cities = Dealer.query.filter_by(
+            country=session["selected_dealer_country"]
+        ).with_entities(Dealer.city)
+        dealer_cities = [city[0] for city in dealer_cities]
+    else:
+        dealer_cities = []
 
     # get vehicles
     print(
@@ -110,5 +133,7 @@ def vehicle_shop():
         colors=colors,
         engines=engines,
         transmissions=transmissions,
+        dealer_countries=dealer_countries,
+        dealer_cities=dealer_cities,
         results=results,
     )

@@ -1,96 +1,16 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}库存管理系统{% endblock %}</h1>
+<h1>{% block title %}经销商系统{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-<form id="brandForm" method="post">
-    <label for="brand">品牌：</label>
-    <select name="brand" id="brand" onchange="document.getElementById('brandForm').submit();">
-        {% for brand in brands %}
-            {% if brand == session["selected_brand"]["name"] %}
-                <option value="{{ brand }}" selected>{{ brand }}</option>
-            {% else %}
-                <option value="{{ brand }}">{{ brand }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
+<form id="type" method="post">
+    <h2>
+        请选择您想要使用的功能
+    </h2>
+    <button type="submit" name="type" value="vehicle">查找车辆</button>
+    <button type="submit" name="type" value="inventory">查看库存</button>
 </form>
-
-<form id="modelForm" method="post">
-    <label for="model">车型：</label>
-    <select name="model" id="model" onchange="document.getElementById('modelForm').submit();" >
-        {% for model in models %}
-            {% if model == session["selected_model"]["name"] %}
-                <option value="{{ model }}" selected>{{ model }}</option>
-            {% else %}
-                <option value="{{ model }}">{{ model }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
-</form>
-
-<form id="colorForm" method="post">
-    <label for="color">颜色：</label>
-    <select name="color" id="color" onchange="document.getElementById('colorForm').submit();" >
-        {% for color in colors %}
-            {% if color == session["selected_color"] %}
-                <option value="{{ color }}" selected>{{ color }}</option>
-            {% else %}
-                <option value="{{ color }}">{{ color }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
-</form>
-
-<form id="engineForm" method="post">
-    <label for="engine">引擎：</label>
-    <select name="engine" id="engine" onchange="document.getElementById('engineForm').submit();" >
-        {% for engine in engines %}
-            {% if engine == session["selected_engine"] %}
-                <option value="{{ engine }}" selected>{{ engine }}</option>
-            {% else %}
-                <option value="{{ engine }}">{{ engine }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
-</form>
-
-<form id="transmissionForm" method="post">
-    <label for="transmission">变速器：</label>
-    <select name="transmission" id="transmission" onchange="document.getElementById('transmissionForm').submit();" >
-        {% for transmission in transmissions %}
-            {% if transmission == session["selected_transmission"] %}
-                <option value="{{ transmission }}" selected>{{ transmission }}</option>
-            {% else %}
-                <option value="{{ transmission }}">{{ transmission }}</option>
-            {% endif %}
-        {% endfor %}
-    </select>
-</form>
-
-<table border="1">
-    <tr>
-        <th>品牌</th>
-        <th>车型</th>
-        <th>颜色</th>
-        <th>引擎</th>
-        <th>变速器</th>
-        <th>价格</th>
-        <th>库存</th>
-    </tr>
-    {% for vehicle in vehicles %}
-        <tr>
-            <td>{{ vehicle.brand }}</td>
-            <td>{{ vehicle.model }}</td>
-            <td>{{ vehicle.color }}</td>
-            <td>{{ vehicle.engine }}</td>
-            <td>{{ vehicle.transmission }}</td>
-            <td>{{ vehicle.price }}</td>
-            <td>{{ vehicle.stock }}</td>
-        </tr>
-    {% endfor %}
-</table>
 
 {% endblock %}

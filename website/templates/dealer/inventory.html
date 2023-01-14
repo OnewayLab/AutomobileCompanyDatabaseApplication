@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}汽车销量分析系统-按车辆类型{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<table border="1">
+    <tr>
+        <th>VIN</th>
+        <th>车型</th>
+        <th>颜色</th>
+        <th>引擎</th>
+        <th>变速器</th>
+        <th>装配工厂</th>
+        <th>装配日期</th>
+        <th>进货日期</th>
+        <th>是否已售</th>
+    </tr>
+    {% for result in results %}
+        <tr>
+            <td>{{ result["vin"] }}</td>
+            <td>{{ result["model"] }}</td>
+            <td>{{ result["color"] }}</td>
+            <td>{{ result["engine"] }}</td>
+            <td>{{ result["transmission"] }}</td>
+            <td>{{ result["plant_name"] }}</td>
+            <td>{{ result["assembly_date"] }}</td>
+            <td>{{ result["date"] }}</td>
+            <td>{{ result["is_sold"] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

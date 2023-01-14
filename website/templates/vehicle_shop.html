@@ -67,6 +67,30 @@
             {% endfor %}
         </select>
     </nobr>
+    <nobr>
+        <label for="dealer_country">经销商所在地：国家：</label>
+        <select name="dealer_country" id="dealer_country" onchange="document.getElementById('filter').submit();" >
+            <option value="any">任意</option>
+            {% for dealer_country in dealer_countries %}
+                {% if dealer_country == session["selected_dealer_country"] %}
+                    <option value="{{ dealer_country }}" selected>{{ dealer_country }}</option>
+                {% else %}
+                    <option value="{{ dealer_country }}">{{ dealer_country }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="dealer_city">城市：</label>
+        <select name="dealer_city" id="dealer_city" onchange="document.getElementById('filter').submit();" >
+            <option value="any">任意</option>
+            {% for dealer_city in dealer_cities %}
+                {% if dealer_city == session["selected_dealer_city"] %}
+                    <option value="{{ dealer_city }}" selected>{{ dealer_city }}</option>
+                {% else %}
+                    <option value="{{ dealer_city }}">{{ dealer_city }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </nobr>
 </form>
 
 <table border="1">
