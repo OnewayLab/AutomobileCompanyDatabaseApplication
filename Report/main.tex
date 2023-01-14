@@ -195,7 +195,7 @@ E-R 图中的联系集以及对应的映射基数和参与约束解释如下：
         vehicle\_op(\underline{VIN}, \underline{MID}, \underline{color}, \underline{engine}, \underline{transmission})\\
         sells(\underline{DID}, \underline{BID})\\
         inventory(\underline{VIN}, DID, year, monty, day, is\_sold)\\
-        sales(\underline{BID}, \underline{MID}, \underline{color} \underline{DID}, \underline{year}, \underline{monty}, \underline{day}, quantity)\\
+        sales(\underline{BID}, \underline{MID}, \underline{color} \underline{DID}, \underline{year}, \underline{monty}, \underline{day}, quantity, sales)\\
         deal(\underline{VIN}, DID, CID, year, monty, day)
     \end{tabular}
 \end{center}
@@ -222,7 +222,7 @@ E-R 图中的联系集以及对应的映射基数和参与约束解释如下：
         made\_of(\underline{VIN}, \underline{part\_model}, manufacturer, year, monty, day)\\
         sells(\underline{DID}, \underline{BID})\\
         inventory(\underline{VIN}, DID, year, month, day, is\_sold)\\
-        sales(\underline{BID}, \underline{MID}, \underline{color}, \underline{DID}, \underline{year}, \underline{monty}, \underline{day}, quantity)\\
+        sales(\underline{BID}, \underline{MID}, \underline{color}, \underline{DID}, \underline{year}, \underline{monty}, \underline{day}, quantity, sales)\\
         deal(\underline{VIN}, DID, CID, year, monty, day)
     \end{tabular}
 \end{center}

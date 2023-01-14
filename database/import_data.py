@@ -246,8 +246,15 @@ def import_test_data(
                 customer_gender=customer.gender,
                 customer_income_range=int(customer.annual_income/10000),
             ).first()
+            option = Option.query.filter_by(
+                mid=vehicle.mid,
+                color=vehicle.color,
+                engine=vehicle.engine,
+                transmission=vehicle.transmission,
+            ).first()
             if sales:
                 sales.quantity += 1
+                sales.sales += option.price
             else:
                 sales = Sales(
                     bid=bid,
@@ -258,5 +265,6 @@ def import_test_data(
                     customer_gender=customer.gender,
                     customer_income_range=int(customer.annual_income/10000),
                     quantity=1,
+                    sales=option.price,
                 )
                 add(sales)

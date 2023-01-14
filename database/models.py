@@ -108,6 +108,7 @@ class Sales(db.Model):
     customer_gender = db.Column(db.String(NAME_LEN), primary_key=True)
     customer_income_range = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer, nullable=False)
+    sales = db.Column(db.Float, nullable=False)
     db.CheckConstraint(quantity >= 0)
     db.CheckConstraint("""
         color IN (
@@ -116,6 +117,9 @@ class Sales(db.Model):
             WHERE mid = model.mid
         )
     """)
+    brand = db.relationship("Brand", backref="sales")
+    model = db.relationship("Model", backref="sales")
+    dealer = db.relationship("Dealer", backref="sales")
 
 class Deal(db.Model):
     vin = db.Column(db.String(NAME_LEN), db.ForeignKey("vehicle.vin"), primary_key=True)
