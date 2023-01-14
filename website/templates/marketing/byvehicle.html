@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}汽车销量分析系统-按车辆类型{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<form id="byVehicle" method="post">
+    <nobr>
+        <text>从</text>
+        <select name="begin_year" id="begin_year" onchange="document.getElementById('byGender').submit();">
+            {% for year in range(end_year-10, end_year+1) %}
+                {% if year == session["begin_year"] %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="begin_year">年</label>
+        <select name="begin_month" id="begin_month" onchange="document.getElementById('byGender').submit();">
+            {% for month in range(1, 13) %}
+                {% if month == session["begin_month"] %}
+                    <option value="{{ month }}" selected>{{ month }}</option>
+                {% else %}
+                    <option value="{{ month }}">{{ month }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="begin_month">月</label>
+        <text>到</text>
+        <select name="end_year" id="end_year" onchange="document.getElementById('byGender').submit();">
+            {% for year in range(session["begin_year"], end_year+1) %}
+                {% if year == session["end_year"] %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="end_year">年</label>
+        <select name="end_month" id="end_month" onchange="document.getElementById('byGender').submit();">
+            {% for month in range(1, 13) %}
+                {% if month == session["end_month"] %}
+                    <option value="{{ month }}" selected>{{ month }}</option>
+                {% else %}
+                    <option value="{{ month }}">{{ month }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="end_month">月</label>
+    </nobr>
+
+    <nobr>
+        <label for="brand">品牌：</label>
+        <select name="brand" id="brand" onchange="document.getElementById('filter').submit();">
+            <option value="any">任意</option>
+            {% for brand in brands %}
+                {% if brand == session["selected_brand"]["name"] %}
+                    <option value="{{ brand }}" selected>{{ brand }}</option>
+                {% else %}
+                    <option value="{{ brand }}">{{ brand }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <label for="model">&nbsp车型：</label>
+        <select name="model" id="model" onchange="document.getElementById('filter').submit();" >
+            <option value="any">任意</option>
+            {% for model in models %}
+                {% if model == session["selected_model"]["name"] %}
+                    <option value="{{ model }}" selected>{{ model }}</option>
+                {% else %}
+                    <option value="{{ model }}">{{ model }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <label for="color">&nbsp颜色：</label>
+        <select name="color" id="color" onchange="document.getElementById('filter').submit();" >
+            <option value="any">任意</option>
+            {% for color in colors %}
+                {% if color == session["selected_color"] %}
+                    <option value="{{ color }}" selected>{{ color }}</option>
+                {% else %}
+                    <option value="{{ color }}">{{ color }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </nobr>
+</form>
+
+<table border="1">
+    <tr>
+        {% for column in columns %}
+            <th>{{ column }}</th>
+        {% endfor %}
+        <th>销量/辆</th>
+        <th>销售额/元</th>
+    </tr>
+    {% for result in results %}
+        <tr>
+            {% if "品牌" in columns %}
+                <td>{{ result.brand }}</td>
+            {% endif %}
+            {% if "车型" in columns %}
+                <td>{{ result.model }}</td>
+            {% endif %}
+            {% if "颜色" in columns %}
+                <td>{{ result.color }}</td>
+            {% endif %}
+            <td>{{ result.quantity }}</td>
+            <td>{{ result.sales }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

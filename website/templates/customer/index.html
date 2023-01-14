@@ -76,18 +76,31 @@
         <th>颜色</th>
         <th>引擎</th>
         <th>变速器</th>
-        <th>价格</th>
-        <th>库存</th>
+        <th>价格/元</th>
+        <th>库存/辆</th>
+        <th>操作</th>
     </tr>
-    {% for vehicle in vehicles %}
+    {% for result in results %}
         <tr>
-            <td>{{ vehicle.model.brand.name }}</td>
-            <td>{{ vehicle.model.name }}</td>
-            <td>{{ vehicle.color }}</td>
-            <td>{{ vehicle.engine }}</td>
-            <td>{{ vehicle.transmission }}</td>
-            <td>{{ vehicle.price }}</td>
-            <td>{{ vehicle.stock }}</td>
+            <td>{{ result.brand }}</td>
+            <td>{{ result.model }}</td>
+            <td>{{ result.color }}</td>
+            <td>{{ result.engine }}</td>
+            <td>{{ result.transmission }}</td>
+            <td>{{ result.price }}</td>
+            <td>{{ result.stock }}</td>
+            <td>
+                <form id="queryDealers" method="post">
+                    <nobr>
+                        <input type="hidden" name="forDealers">
+                        <input type="hidden" name="model" value="{{ result.model }}">
+                        <input type="hidden" name="color" value="{{ result.color }}">
+                        <input type="hidden" name="engine" value="{{ result.engine }}">
+                        <input type="hidden" name="transmission" value="{{ result.transmission }}">
+                        <input type="submit" value="查询经销商">
+                    </nobr>
+                </form>
+            </td>
         </tr>
     {% endfor %}
 </table>
