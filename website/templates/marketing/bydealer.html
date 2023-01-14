@@ -1,20 +1,15 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}库存管理系统{% endblock %}</h1>
+<h1>{% block title %}销量分析系统-按经销商{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-<form id="brandForm" method="post">
-    <label for="brand">品牌：</label>
-    <select name="brand" id="brand" onchange="document.getElementById('brandForm').submit();">
-        {% for brand in brands %}
-            {% if brand == session["selected_brand"]["name"] %}
-                <option value="{{ brand }}" selected>{{ brand }}</option>
-            {% else %}
-                <option value="{{ brand }}">{{ brand }}</option>
-            {% endif %}
-        {% endfor %}
+<form id="timeForm" method="post">
+    <label for="time">品牌：</label>
+    <select name="time" id="time" onchange="document.getElementById('timeForm').submit();">
+        <option value="{{ brand }}" selected>{{ brand }}</option>
+
     </select>
 </form>
 

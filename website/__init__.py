@@ -29,9 +29,10 @@ def create_app(db):
         pass
 
     # register blueprints
-    from . import auth, customer
+    from . import auth, customer, marketing
     app.register_blueprint(auth.bp)
     app.register_blueprint(customer.bp)
+    app.register_blueprint(marketing.bp)
 
     app.add_url_rule("/", endpoint="index")
 

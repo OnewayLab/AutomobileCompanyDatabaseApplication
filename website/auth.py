@@ -52,7 +52,7 @@ def login():
             elif role == "dealer":
                 print(f"dealer {username} login")
                 return redirect(url_for("dealer.index"))
-            elif role == "supplier":
+            elif role == "marketing":
                 print(f"marketing {username} login")
                 return redirect(url_for("marketing.index"))
             else:

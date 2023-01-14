@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}销量分析系统{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form id="type" method="post">
+    <h2>
+        请选择分析方式
+    </h2>
+    <button type="submit" name="type" value="time">按时间</button>
+    <button type="submit" name="type" value="vehicle">按车辆</button>
+    <button type="submit" name="type" value="dealer">按经销商</button>
+    <button type="submit" name="type" value="customer">按客户</button>
+</form>
+
+{% endblock %}
