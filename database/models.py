@@ -16,12 +16,15 @@ class Model(db.Model):
     body_style = db.Column(db.String(INFO_LEN), nullable=False)
     bid = db.Column(db.Integer, db.ForeignKey("brand.bid", ondelete="CASCADE"), nullable=False)
     parts = db.relationship("Part", backref="models", secondary="requires")
+    brand = db.relationship("Brand", backref="models")
 
 class Option(db.Model):
     mid = db.Column(db.Integer, db.ForeignKey("model.mid", ondelete="CASCADE"), primary_key=True)
     color = db.Column(db.String(INFO_LEN), primary_key=True)
     engine = db.Column(db.String(INFO_LEN), primary_key=True)
     transmission = db.Column(db.String(INFO_LEN), primary_key=True)
+    price = db.Column(db.Float, nullable=False)
+    model = db.relationship("Model", backref="options")
 
 class Part(db.Model):
     part_model = db.Column(db.String(NAME_LEN), primary_key=True)
@@ -44,14 +47,14 @@ class Plant(db.Model):
 
 class Vehicle(db.Model):
     vin = db.Column(db.String(NAME_LEN), primary_key=True)
-    price = db.Column(db.Float, nullable=False)
     plant_name = db.Column(db.String(NAME_LEN), db.ForeignKey("plant.plant_name"), nullable=False)
     assembly_date = db.Column(db.Date, nullable=False)
-    mid = db.Column(db.Integer, nullable=False)
+    mid = db.Column(db.Integer, db.ForeignKey("model.mid"), nullable=False)
     color = db.Column(db.String(INFO_LEN), nullable=False)
     engine = db.Column(db.String(INFO_LEN), nullable=False)
     transmission = db.Column(db.String(INFO_LEN), nullable=False)
-    db.ForeignKeyConstraint(["mid", "color", "engine", "transmission"], ["option.mid", "option.color", "option.engine", "option.transmission"])
+    db.ForeignKeyConstraint(["mid", "color", "engine", "transmission"], ["Option.mid", "Option.color", "Option.engine", "Option.transmission"])
+    model = db.relationship("Model", backref="vehicles")
 
 class Dealer(db.Model):
     did = db.Column(db.Integer, primary_key=True)
@@ -84,7 +87,17 @@ class Inventory(db.Model):
     did = db.Column(db.Integer, db.ForeignKey("dealer.did"), primary_key=True)
     date = db.Column(db.Date, nullable=False)
     is_sold = db.Column(db.Boolean, nullable=False)
-    db.CheckConstraint("did IN (SELECT did FROM dealer, sells WHERE dealer.did = sells.did AND sells.bid = (SELECT bid FROM vehicle, model WHERE vehicle.mid = model.mid AND vehicle.vin = :vin))")
+    db.CheckConstraint("""
+        did IN (
+            SELECT did
+            FROM dealer, sells
+            WHERE dealer.did = sells.did AND sells.bid = (
+                SELECT bid
+                FROM vehicle, model
+                WHERE vehicle.mid = model.mid AND vehicle.vin = :vin
+            )
+        )
+    """)
 
 class Sales(db.Model):
     bid = db.Column(db.Integer, db.ForeignKey("brand.bid"), primary_key=True)
@@ -92,9 +105,17 @@ class Sales(db.Model):
     color = db.Column(db.String(INFO_LEN), primary_key=True)
     did = db.Column(db.Integer, db.ForeignKey("dealer.did"), primary_key=True)
     date = db.Column(db.Date, primary_key=True)
+    customer_gender = db.Column(db.String(NAME_LEN), primary_key=True)
+    customer_income_range = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer, nullable=False)
     db.CheckConstraint(quantity >= 0)
-    db.CheckConstraint("color in (select color from option where mid = model.mid)")
+    db.CheckConstraint("""
+        color IN (
+            SELECT color
+            FROM option
+            WHERE mid = model.mid
+        )
+    """)
 
 class Deal(db.Model):
     vin = db.Column(db.String(NAME_LEN), db.ForeignKey("vehicle.vin"), primary_key=True)
@@ -119,10 +140,11 @@ class Sells(db.Model):
     bid = db.Column(db.Integer, db.ForeignKey("brand.bid", ondelete="CASCADE"), primary_key=True)
 
 class QueryRecord(db.Model):
-    bid = db.Column(db.Integer, db.ForeignKey("brand.bid"), primary_key=True)
-    mid = db.Column(db.Integer, db.ForeignKey("model.mid"), primary_key=True)
-    color = db.Column(db.String(INFO_LEN), primary_key=True)
-    engine = db.Column(db.String(INFO_LEN), primary_key=True)
-    transmission = db.Column(db.String(INFO_LEN), primary_key=True)
-    date = db.Column(db.Date, primary_key=True)
-    count = db.Column(db.Integer, nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    bid = db.Column(db.Integer)
+    mid = db.Column(db.Integer)
+    color = db.Column(db.String(INFO_LEN))
+    engine = db.Column(db.String(INFO_LEN))
+    transmission = db.Column(db.String(INFO_LEN))
+    date = db.Column(db.Date)
+    count = db.Column(db.Integer)

@@ -11,6 +11,7 @@ from .models import *
 
 def import_test_data(
     app: Flask,
+    vehicles: int,
     brand_models_path: str,
     customers_path: str,
     dealers_path: str,
@@ -22,6 +23,7 @@ def import_test_data(
 
     Args:
         app: Flask app
+        vehicles: number of vehicles to be generated
         other args are json file paths of test data sources
     """
     random.seed(1234)
@@ -31,13 +33,13 @@ def import_test_data(
     plants = json.load(open(plants_path, "r"))
     suppliers = json.load(open(suppliers_path, "r"))
     etc = json.load(open(etc_path, "r"))
-    colors, engines, transmissions, parts, vins, body_styles = etc.values()
+    colors, engines, transmissions, parts, body_styles = etc.values()
 
     # generate random vins
     alphabet = 'abcdefghijklmnopqrstuvwxyz0123456789'
-    for _ in range(200):
-        vins += ''.join(random.sample(alphabet, 19))
-    vins = set(vins)
+    vins = set()
+    for _ in range(vehicles):
+        vins.add(''.join(random.sample(alphabet, 19)))
 
     max_mid = 0
     generated_parts = set()
@@ -76,6 +78,7 @@ def import_test_data(
                             color=op[0],
                             engine=op[1],
                             transmission=op[2],
+                            price=randint(10000, 100000),
                         )
                         add(option)
                 generated_options[max_mid] = option_set
@@ -183,7 +186,6 @@ def import_test_data(
             color, engine, transmission = choice(list(generated_options[mid]))
             v = Vehicle(
                 vin=vin,
-                price=randint(10000, 100000),
                 plant_name=plant,
                 assembly_date=date,
                 mid=mid,
@@ -234,12 +236,15 @@ def import_test_data(
             vehicle = Vehicle.query.filter_by(vin=inventory.vin).first()
             bid = Model.query.filter_by(mid=vehicle.mid).first().bid
             add(deal)
+            customer = Customer.query.filter_by(cid=deal.cid).first()
             sales = Sales.query.filter_by(
                 bid=bid,
                 mid=vehicle.mid,
                 color=vehicle.color,
                 did=inventory.did,
                 date=deal.date,
+                customer_gender=customer.gender,
+                customer_income_range=int(customer.annual_income/10000),
             ).first()
             if sales:
                 sales.quantity += 1
@@ -250,6 +255,8 @@ def import_test_data(
                     color=vehicle.color,
                     did=inventory.did,
                     date=deal.date,
+                    customer_gender=customer.gender,
+                    customer_income_range=int(customer.annual_income/10000),
                     quantity=1,
                 )
                 add(sales)

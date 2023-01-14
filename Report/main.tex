@@ -5,13 +5,13 @@
 
 \usepackage[unicode=true,colorlinks,urlcolor=blue,linkcolor=blue,bookmarksnumbered=true]{hyperref}
 \usepackage{latexsym,amssymb,amsmath,amsbsy,amsopn,amstext,amsthm,amsxtra,color,bm,calc,ifpdf}
+\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{enumerate}
 \usepackage{fancyhdr}
 \usepackage{listings}
 \usepackage{multirow}
 \usepackage{makeidx}
-\usepackage{xcolor}
 \usepackage{fontspec}
 \usepackage{subfigure}
 \usepackage{hyperref}
@@ -95,7 +95,7 @@
 
 \subsection{系统设计}
 
-根据以上需求分析，本项目使用 MySQL 作为数据库管理系统，并开发一个网站作为应用界面来支持不同类型用户的不同需求。系统总体结构如下：
+根据以上需求分析，本项目使用 PostgreSQL 作为数据库管理系统，并开发一个网站作为应用界面来支持不同类型用户的不同需求。系统总体结构如下：
 
 \begin{figure}[h]
     \centering
@@ -104,7 +104,7 @@
     \label{fig:汽车公司管理系统结构图}
 \end{figure}
 
-如图\ref{fig:汽车公司管理系统结构图}所示，本系统包含 4 个部分。其中，用于存储信息的数据库由 MySQL 提供支持，数据库的设计将在第\ref{sec:数据库设计}节详细阐述。而用户界面、功能和模块需编写 python 程序实现，将在第\ref{sec:应用程序设计}节详细阐述。最后，第\ref{sec:功能展示和测试}节将展示系统的使用方法并通过几个测试来证明本系统的正确性和实用性。
+如图\ref{fig:汽车公司管理系统结构图}所示，本系统包含 4 个部分。其中，用于存储信息的数据库由 PostgreSQL 提供支持，数据库的设计将在第\ref{sec:数据库设计}节详细阐述。而用户界面、功能和模块需编写 python 程序实现，将在第\ref{sec:应用程序设计}节详细阐述。最后，第\ref{sec:功能展示和测试}节将展示系统的使用方法并通过几个测试来证明本系统的正确性和实用性。
 
 \section{数据库设计\label{sec:数据库设计}}
 
@@ -139,11 +139,11 @@ E-R 图中的实体集如下：
 \begin{itemize}[itemsep=2pt,topsep=0pt,parsep=0pt]
     \item \textit{Brand}：品牌，包含属性\textit{(\underline{BID}, name)}；
     \item \textit{Model}：车型，包含属性\textit{(\underline{MID}, name, body\_style)}；
-    \item \textit{Option}：选项组合，一个车型可能提供颜色、引擎、变速器不同的汽车，这是一个依赖于\textit{Model}的弱实体集，包含属性\textit{(\underline{color}, \underline{engine}, \underline{transmission})}；
+    \item \textit{Option}：选项组合，一个车型可能提供颜色、引擎、变速器不同的汽车，这是一个依赖于\textit{Model}的弱实体集，包含属性\textit{(\underline{color}, \underline{engine}, \underline{transmission}, price)}；
     \item \textit{Part}：汽车部件，包含属性\textit{(\underline{model}, name, info)}，一种部件可以由公司自己的工厂生产，也可以由供应商提供，注意这里的属性\textit{model}是指部件的型号而不是车型；
     \item \textit{Supplier}：供应商，向汽车公司供应汽车部件，包含属性\textit{(\underline{supplier\_name}, address(country, city, street))}；
     \item \textit{Plant}：汽车公司自己所有的工厂，包含属性\textit{(\underline{plant\_name}, work\_type, address(country, city, street))}，其中，\textit{work\_type}表示该工厂是生产汽车部件还是组装汽车；
-    \item \textit{Vehicle}：汽车，包含属性\textit{(\underline{VIN}, price)}；
+    \item \textit{Vehicle}：汽车，包含属性\textit{(\underline{VIN})}；
     \item \textit{Dealer}：经销商，包含属性\textit{(\underline{DID}, name, area(country, city))}；
     \item \textit{Customer}：顾客，包含属性\textit{(\underline{CID}, name, address(country, city, street), \{phone\}, gender, annual\_income)}，由于一位顾客可能有不止一个电话号码，所以\textit{phone}是多值属性。
 \end{itemize}
@@ -177,11 +177,11 @@ E-R 图中的联系集以及对应的映射基数和参与约束解释如下：
     \begin{tabular}{l}
         Brand(\underline{BID}, name)\\
         Model(\underline{MID}, name, body\_style)\\
-        Option(\underline{MID}, \underline{color}, \underline{engine}, \underline{transmission})\\
+        Option(\underline{MID}, \underline{color}, \underline{engine}, \underline{transmission}, price)\\
         Part(\underline{model}, name, info)\\
         Supplier(\underline{supplier\_name}, country, city, street)\\
         Plant(\underline{plant\_name}, work\_type, country, city, street)\\
-        Vehicle(\underline{VIN}, price)\\
+        Vehicle(\underline{VIN})\\
         Dealer(\underline{DID}, name, country, city)\\
         Customer(\underline{CID}, name, country, city, street, gender, annual\_income)\\
         customer\_phone(\underline{CID}, \underline{phone})\\
@@ -208,11 +208,11 @@ E-R 图中的联系集以及对应的映射基数和参与约束解释如下：
     \begin{tabular}{l}
         Brand(\underline{BID}, name)\\
         Model(\underline{MID}, name, body\_style, BID)\\
-        Option(\underline{MID}, \underline{color}, \underline{engine}, \underline{transmission})\\
+        Option(\underline{MID}, \underline{color}, \underline{engine}, \underline{transmission}, price)\\
         Part(\underline{model}, name, info)\\
         Supplier(\underline{supplier\_name}, country, city, street)\\
         Plant(\underline{plant\_name}, work\_type, country, city, street)\\
-        \makecell[l]{Vehicle(\underline{VIN}, price, plant\_name, assembly\_year, assembly\_month, assembly\_day, \\ \qquad \quad \  MID, color, engine, transmission)}\\
+        \makecell[l]{Vehicle(\underline{VIN}, plant\_name, assembly\_year, assembly\_month, assembly\_day, \\ \qquad \quad \  MID, color, engine, transmission)}\\
         Dealer(\underline{DID}, name, country, city)\\
         Customer(\underline{CID}, name, country, city, street, gender, annual\_income)\\
         customer\_phone(\underline{CID}, \underline{phone})\\
@@ -227,151 +227,43 @@ E-R 图中的联系集以及对应的映射基数和参与约束解释如下：
     \end{tabular}
 \end{center}
 
-\subsection{SQL}
+\subsection{创建数据库}
 
-在本项目中，使用 MySQL 作为数据库管理系统。首先，我们根据\ref{sec:对关系模式进行优化}小节中的关系模式，编写如下 SQL DDL 脚本以创建数据库：
+在本项目中，使用 PostgreSQL 作为数据库管理系统，使用 Flask 网页应用框架和 SQLAlchemy ORM 库。ORM 库的使用可以使我们以操纵 python 对象的方式来操纵数据库中的表格，而不必编写繁琐的 SQL 查询。首先，我们根据\ref{sec:对关系模式进行优化}小节中的关系模式，编写 ORM 模型以创建数据库。由于本数据库中的关系较多，下面以 Inventory 为例，介绍 ORM 模型的编写方法，完整代码见 ./database/models.py。
 
-\begin{lstlisting}[language=SQL]
-CREATE DATABASE AutomobileCompany;
-USE AutomobileCompany;
-CREATE TABLE Brand (
-    BID VARCHAR(20) NOT NULL,
-    name VARCHAR(20) NOT NULL,
-    PRIMARY KEY (BID)
-);
-CREATE TABLE Model (
-    MID VARCHAR(20) NOT NULL,
-    name VARCHAR(20) NOT NULL,
-    body_style VARCHAR(20) NOT NULL,
-    BID VARCHAR(20) NOT NULL,
-    PRIMARY KEY (MID),
-    FOREIGN KEY (BID) REFERENCES Brand(BID)
-);
-CREATE TABLE Option (
-    MID VARCHAR(20) NOT NULL,
-    color VARCHAR(20) NOT NULL,
-    engine VARCHAR(20) NOT NULL,
-    transmission VARCHAR(20) NOT NULL,
-    PRIMARY KEY (MID, color, engine, transmission),
-    FOREIGN KEY (MID) REFERENCES Model(MID)
-);
-CREATE TABLE Part (
-    model VARCHAR(20) NOT NULL,
-    name VARCHAR(20) NOT NULL,
-    info VARCHAR(20),
-    PRIMARY KEY (model)
-);
-CREATE TABLE Supplier (
-    supplier_name VARCHAR(20) NOT NULL,
-    country VARCHAR(20),
-    city VARCHAR(20),
-    street VARCHAR(20),
-    PRIMARY KEY (supplier_name)
-);
-CREATE TABLE Plant (
-    plant_name VARCHAR(20) NOT NULL,
-    work_type VARCHAR(20) NOT NULL,
-    country VARCHAR(20),
-    city VARCHAR(20),
-    street VARCHAR(20),
-    PRIMARY KEY (plant_name)
-);
-CREATE TABLE Vehicle (
-    VIN VARCHAR(20) NOT NULL,
-    price INT NOT NULL,
-    plant_name VARCHAR(20) NOT NULL,
-    assembly_year INT NOT NULL,
-    assembly_month INT NOT NULL,
-    assembly_day INT NOT NULL,
-    MID VARCHAR(20) NOT NULL,
-    color VARCHAR(20) NOT NULL,
-    engine VARCHAR(20) NOT NULL,
-    transmission VARCHAR(20) NOT NULL,
-    PRIMARY KEY (VIN),
-    FOREIGN KEY (plant_name) REFERENCES Plant(plant_name),
-    FOREIGN KEY (MID, color, engine, transmission) REFERENCES Option(MID, color, engine, transmission)
-);
-CREATE TABLE Dealer (
-    DID VARCHAR(20) NOT NULL,
-    name VARCHAR(20) NOT NULL,
-    country VARCHAR(20),
-    city VARCHAR(20),
-    PRIMARY KEY (DID)
-);
-CREATE TABLE Customer (
-    CID VARCHAR(20) NOT NULL,
-    name VARCHAR(20) NOT NULL,
-    country VARCHAR(20),
-    city VARCHAR(20),
-    street VARCHAR(20),
-    gender VARCHAR(20),
-    annual_income INT,
-    PRIMARY KEY (CID)
-);
-CREATE TABLE customer_phone (
-    CID VARCHAR(20) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    PRIMARY KEY (CID, phone),
-    FOREIGN KEY (CID) REFERENCES Customer(CID)
-);
-CREATE TABLE requires (
-    MID VARCHAR(20) NOT NULL,
-    part_model VARCHAR(20) NOT NULL,
-    PRIMARY KEY (MID, part_model),
-    FOREIGN KEY (MID) REFERENCES Model(MID),
-    FOREIGN KEY (part_model) REFERENCES Part(model)
-);
-CREATE TABLE supplies (
-    supplier_name VARCHAR(20) NOT NULL,
-    part_model VARCHAR(20) NOT NULL,
-    PRIMARY KEY (supplier_name, part_model),
-    FOREIGN KEY (supplier_name) REFERENCES Supplier(supplier_name),
-    FOREIGN KEY (part_model) REFERENCES Part(model)
-);
-CREATE TABLE manufactures (
-    plant_name VARCHAR(20) NOT NULL,
-    part_model VARCHAR(20) NOT NULL,
-    PRIMARY KEY (plant_name, part_model),
-    FOREIGN KEY (plant_name) REFERENCES Plant(plant_name),
-    FOREIGN KEY (part_model) REFERENCES Part(model)
-);
-CREATE TABLE inventory (
-    VIN VARCHAR(20) NOT NULL,
-    DID VARCHAR(20) NOT NULL,
-    year INT NOT NULL,
-    month INT NOT NULL,
-    day INT NOT NULL,
-    is_sold INT NOT NULL,
-    PRIMARY KEY (VIN),
-    FOREIGN KEY (VIN) REFERENCES Vehicle(VIN),
-    FOREIGN KEY (DID) REFERENCES Dealer(DID)
-);
-CREATE TABLE sales(
-    BID VARCHAR(20) NOT NULL,
-    MID VARCHAR(20) NOT NULL,
-    color VARCHAR(20) NOT NULL,
-    DID VARCHAR(20) NOT NULL,
-    year INT NOT NULL,
-    month INT NOT NULL,
-    day INT NOT NULL,
-    quantity INT NOT NULL,
-    PRIMARY KEY (BID, MID, color, DID, year, month, day),
-    FOREIGN KEY (BID) REFERENCES Brand(BID),
-    FOREIGN KEY (MID, color) REFERENCES Option(MID, color),
-    FOREIGN KEY (DID) REFERENCES Dealer(DID)
-);
-CREATE TABLE sells (
-    VIN VARCHAR(20) NOT NULL,
-    DID VARCHAR(20) NOT NULL,
-    CID VARCHAR(20) NOT NULL,
-    year INT NOT NULL,
-    month INT NOT NULL,
-    day INT NOT NULL,
-    PRIMARY KEY (VIN),
-    FOREIGN KEY (VIN, DID) REFERENCES inventory(VIN, DID),
-    FOREIGN KEY (CID) REFERENCES Customer(CID)
-);
-\end{lstlisting}
+\begin{python}
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
+
+class Inventory(db.Model):
+    vin = db.Column(
+        db.String(NAME_LEN),
+        db.ForeignKey("vehicle.vin"),
+        primary_key=True
+    )
+    did = db.Column(
+        db.Integer,
+        db.ForeignKey("dealer.did"),
+        primary_key=True
+    )
+    date = db.Column(db.Date, nullable=False)
+    is_sold = db.Column(db.Boolean, nullable=False)
+    db.CheckConstraint("""
+        did IN (
+            SELECT did
+            FROM dealer, sells
+            WHERE dealer.did = sells.did AND sells.bid = (
+                SELECT bid
+                FROM vehicle, model
+                WHERE vehicle.mid = model.mid AND vehicle.vin = :vin
+            )
+        )
+    """)
+\end{python}
+
+利用 SQLAlchemy，要想在数据库中定义一个表格，只需在 python 程序中定义一个继承自 db.Model 的类，然后为每个属性定义一个 db.Column 对象即可。在上面的代码中，我们定义了一个 Inventory 类，它的主键是 vin 和 did，date 和 is\_sold 作为非空属性，最后一行是一个检查约束，用来保证 did 属性的值必须是与 vin 对应的车辆的品牌对应的经销商的 did。这样，我们就可以通过 Inventory 类来创建、查询、更新和删除数据库中的 inventory 表格了。
+
+定义完所有 ORM 模型后，调用 db.create\_all() 即可在数据库中创建所有表格。
 
 \
 
@@ -388,7 +280,18 @@ CREATE TABLE sells (
 
 \section{功能展示和测试\label{sec:功能展示和测试}}
 
-\subsection{测试数据生成}
+\subsection{测试数据生成与导入}
+
+首先，为了使演示更接近真实世界的使用场景，我利用人工智能语言模型 chatGPT 生成了一些品牌、车型、供应商、工厂、经销商和客户信息等，以 json 文件形式放在 ./database/test\_data 下；然后编写了一个 python 程序 ./database/import\_data.py 来根据 json 文件随机生成记录并导入数据库，生成数据时要注意符合完整性约束。
+
+\subsection{查询测试}
+
+通过作业要求中的几个查询，我们可以验证上述数据库设计的合理性和正确性：
+
+\begin{itemize}
+    \item 展示近三年的销量趋势，然后把销量数据分别按买家的性别和年收入分类。
+\end{itemize}
+
 
 
 \subsection{功能测试}

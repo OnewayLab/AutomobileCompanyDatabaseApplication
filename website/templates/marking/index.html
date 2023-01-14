@@ -1,14 +1,13 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}汽车商城{% endblock %}</h1>
+<h1>{% block title %}库存管理系统{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <form id="brandForm" method="post">
     <label for="brand">品牌：</label>
     <select name="brand" id="brand" onchange="document.getElementById('brandForm').submit();">
-        <option value="any">任意</option>
         {% for brand in brands %}
             {% if brand == session["selected_brand"]["name"] %}
                 <option value="{{ brand }}" selected>{{ brand }}</option>
@@ -22,7 +21,6 @@
 <form id="modelForm" method="post">
     <label for="model">车型：</label>
     <select name="model" id="model" onchange="document.getElementById('modelForm').submit();" >
-        <option value="any">任意</option>
         {% for model in models %}
             {% if model == session["selected_model"]["name"] %}
                 <option value="{{ model }}" selected>{{ model }}</option>
@@ -36,7 +34,6 @@
 <form id="colorForm" method="post">
     <label for="color">颜色：</label>
     <select name="color" id="color" onchange="document.getElementById('colorForm').submit();" >
-        <option value="any">任意</option>
         {% for color in colors %}
             {% if color == session["selected_color"] %}
                 <option value="{{ color }}" selected>{{ color }}</option>
@@ -50,7 +47,6 @@
 <form id="engineForm" method="post">
     <label for="engine">引擎：</label>
     <select name="engine" id="engine" onchange="document.getElementById('engineForm').submit();" >
-        <option value="any">任意</option>
         {% for engine in engines %}
             {% if engine == session["selected_engine"] %}
                 <option value="{{ engine }}" selected>{{ engine }}</option>
@@ -64,7 +60,6 @@
 <form id="transmissionForm" method="post">
     <label for="transmission">变速器：</label>
     <select name="transmission" id="transmission" onchange="document.getElementById('transmissionForm').submit();" >
-        <option value="any">任意</option>
         {% for transmission in transmissions %}
             {% if transmission == session["selected_transmission"] %}
                 <option value="{{ transmission }}" selected>{{ transmission }}</option>
@@ -87,8 +82,8 @@
     </tr>
     {% for vehicle in vehicles %}
         <tr>
-            <td>{{ vehicle.model.brand.name }}</td>
-            <td>{{ vehicle.model.name }}</td>
+            <td>{{ vehicle.brand }}</td>
+            <td>{{ vehicle.model }}</td>
             <td>{{ vehicle.color }}</td>
             <td>{{ vehicle.engine }}</td>
             <td>{{ vehicle.transmission }}</td>

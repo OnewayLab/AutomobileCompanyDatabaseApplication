@@ -9,11 +9,12 @@
 \contentsline {subsection}{\numberline {2.2}关系模式}{6}{subsection.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.1}将 E-R 图转换为关系模式}{6}{subsubsection.2.2.1}%
 \contentsline {subsubsection}{\numberline {2.2.2}对关系模式进行优化}{6}{subsubsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.3}SQL}{7}{subsection.2.3}%
-\contentsline {section}{\numberline {3}应用程序设计}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}功能概述}{10}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}用户界面}{10}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}模块和功能}{10}{subsection.3.3}%
-\contentsline {section}{\numberline {4}功能展示和测试}{10}{section.4}%
-\contentsline {subsection}{\numberline {4.1}测试数据生成}{10}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}功能测试}{10}{subsection.4.2}%
+\contentsline {subsection}{\numberline {2.3}创建数据库}{7}{subsection.2.3}%
+\contentsline {section}{\numberline {3}应用程序设计}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}功能概述}{8}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}用户界面}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}模块和功能}{8}{subsection.3.3}%
+\contentsline {section}{\numberline {4}功能展示和测试}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}测试数据生成与导入}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}查询测试}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}功能测试}{8}{subsection.4.3}%

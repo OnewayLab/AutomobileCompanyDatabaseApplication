@@ -35,6 +35,9 @@ def get_vehicles(
     if transmission:
         vehicles = vehicles.filter_by(transmission=transmission)
         record = record.filter_by(transmission=transmission)
+    if bid:
+        vehicles = vehicles.join(Model).join(Brand).filter_by(bid=bid)
+        record = record.filter_by(bid=bid)
 
     record = record.first()
     if record:
@@ -51,5 +54,5 @@ def get_vehicles(
         )
     db.session.add(record)
     db.session.commit()
-
+    print(vehicles)
     return vehicles.all()
