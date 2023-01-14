@@ -79,7 +79,7 @@
         <label for="begin_month">月</label>
         <text>到</text>
         <select name="end_year" id="end_year" onchange="document.getElementById('byMonth').submit();">
-            {% for year in range(session["byyear_begin_year"], end_year+1) %}
+            {% for year in range(session["bymonth_begin_year"], end_year+1) %}
                 {% if year == session["bymonth_end_year"] %}
                     <option value="{{ year }}" selected>{{ year }}</option>
                 {% else %}

@@ -46,13 +46,13 @@ def login():
             session.clear()
             session["username"] = username
             session["role"] = role
-            if role == "customer":
+            if role == "顾客":
                 print(f"customer {username} login")
                 return redirect(url_for("customer.index"))
-            elif role == "dealer":
+            elif role == "经销商":
                 print(f"dealer {username} login")
                 return redirect(url_for("dealer.index"))
-            elif role == "marketing":
+            elif role == "市场部":
                 print(f"marketing {username} login")
                 return redirect(url_for("marketing.index"))
             else:

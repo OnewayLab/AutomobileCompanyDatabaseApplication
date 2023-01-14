@@ -7,13 +7,13 @@
 {% block content %}
 <h2>按性别</h2>
 
-<form id="byCostumer" method="post">
-    <input type="hidden" name="by" value="year">
+<form id="byGender" method="post">
+    <input type="hidden" name="by" value="gender">
     <nobr>
         <text>从</text>
-        <select name="begin_year" id="begin_year" onchange="document.getElementById('byCostumer').submit();">
+        <select name="begin_year" id="begin_year" onchange="document.getElementById('byGender').submit();">
             {% for year in range(end_year-10, end_year+1) %}
-                {% if year == session["byyear_begin_year"] %}
+                {% if year == session["bygender_begin_year"] %}
                     <option value="{{ year }}" selected>{{ year }}</option>
                 {% else %}
                     <option value="{{ year }}">{{ year }}</option>
@@ -21,55 +21,9 @@
             {% endfor %}
         </select>
         <label for="begin_year">年</label>
-        <text>到</text>
-        <select name="end_year" id="end_year" onchange="document.getElementById('byCostumer').submit();">
-            {% for year in range(session["byyear_begin_year"], end_year+1) %}
-                {% if year == session["byyear_end_year"] %}
-                    <option value="{{ year }}" selected>{{ year }}</option>
-                {% else %}
-                    <option value="{{ year }}">{{ year }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <label for="end_year">年</label>
-    </nobr>
-</form>
-
-<table border="1">
-    <tr>
-        <th>年份</th>
-        <th>销量</th>
-        <th>销售额</th>
-    </tr>
-    {% for row in result_byyear %}
-        <tr>
-            <td>{{ row.year }}</td>
-            <td>{{ row.quantity }}</td>
-            <td>{{ row.sales }}</td>
-        </tr>
-    {% endfor %}
-</table>
-
-
-<h2>按月份</h2>
-
-<form id="byMonth" method="post">
-    <input type="hidden" name="by" value="month">
-    <nobr>
-        <text>从</text>
-        <select name="begin_year" id="begin_year" onchange="document.getElementById('byMonth').submit();">
-            {% for year in range(end_year-10, end_year+1) %}
-                {% if year == session["bymonth_begin_year"] %}
-                    <option value="{{ year }}" selected>{{ year }}</option>
-                {% else %}
-                    <option value="{{ year }}">{{ year }}</option>
-                {% endif %}
-            {% endfor %}
-        </select>
-        <label for="begin_year">年</label>
-        <select name="begin_month" id="begin_month" onchange="document.getElementById('byMonth').submit();">
+        <select name="begin_month" id="begin_month" onchange="document.getElementById('byGender').submit();">
             {% for month in range(1, 13) %}
-                {% if month == session["bymonth_begin_month"] %}
+                {% if month == session["bygender_begin_month"] %}
                     <option value="{{ month }}" selected>{{ month }}</option>
                 {% else %}
                     <option value="{{ month }}">{{ month }}</option>
@@ -78,9 +32,9 @@
         </select>
         <label for="begin_month">月</label>
         <text>到</text>
-        <select name="end_year" id="end_year" onchange="document.getElementById('byMonth').submit();">
-            {% for year in range(session["byyear_begin_year"], end_year+1) %}
-                {% if year == session["bymonth_end_year"] %}
+        <select name="end_year" id="end_year" onchange="document.getElementById('byGender').submit();">
+            {% for year in range(session["bygender_begin_year"], end_year+1) %}
+                {% if year == session["bygender_end_year"] %}
                     <option value="{{ year }}" selected>{{ year }}</option>
                 {% else %}
                     <option value="{{ year }}">{{ year }}</option>
@@ -88,9 +42,9 @@
             {% endfor %}
         </select>
         <label for="end_year">年</label>
-        <select name="end_month" id="end_month" onchange="document.getElementById('byMonth').submit();">
+        <select name="end_month" id="end_month" onchange="document.getElementById('byGender').submit();">
             {% for month in range(1, 13) %}
-                {% if month == session["bymonth_end_month"] %}
+                {% if month == session["bygender_end_month"] %}
                     <option value="{{ month }}" selected>{{ month }}</option>
                 {% else %}
                     <option value="{{ month }}">{{ month }}</option>
@@ -103,15 +57,78 @@
 
 <table border="1">
     <tr>
-        <th>年份</th>
-        <th>月份</th>
-        <th>销量</th>
-        <th>销售额</th>
+        <th>顾客性别</th>
+        <th>销量/辆</th>
+        <th>销售额/元</th>
     </tr>
-    {% for row in result_bymonth %}
+    {% for row in result_bygender %}
         <tr>
-            <td>{{ row.year }}</td>
-            <td>{{ row.month }}</td>
+            <td>{{ row.customer_gender }}</td>
+            <td>{{ row.quantity }}</td>
+            <td>{{ row.sales }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+<h2>按年收入</h2>
+
+<form id="byIncome" method="post">
+    <input type="hidden" name="by" value="income">
+    <nobr>
+        <text>从</text>
+        <select name="begin_year" id="begin_year" onchange="document.getElementById('byIncome').submit();">
+            {% for year in range(end_year-10, end_year+1) %}
+                {% if year == session["byincome_begin_year"] %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="begin_year">年</label>
+        <select name="begin_month" id="begin_month" onchange="document.getElementById('byIncome').submit();">
+            {% for month in range(1, 13) %}
+                {% if month == session["byincome_begin_month"] %}
+                    <option value="{{ month }}" selected>{{ month }}</option>
+                {% else %}
+                    <option value="{{ month }}">{{ month }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="begin_month">月</label>
+        <text>到</text>
+        <select name="end_year" id="end_year" onchange="document.getElementById('byIncome').submit();">
+            {% for year in range(session["byincome_begin_year"], end_year+1) %}
+                {% if year == session["byincome_end_year"] %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="end_year">年</label>
+        <select name="end_month" id="end_month" onchange="document.getElementById('byIncome').submit();">
+            {% for month in range(1, 13) %}
+                {% if month == session["byincome_end_month"] %}
+                    <option value="{{ month }}" selected>{{ month }}</option>
+                {% else %}
+                    <option value="{{ month }}">{{ month }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="end_month">月</label>
+    </nobr>
+</form>
+
+<table border="1">
+    <tr>
+        <th>顾客年收入/元</th>
+        <th>销量/辆</th>
+        <th>销售额/元</th>
+    </tr>
+    {% for row in result_byincome %}
+        <tr>
+            <td>{{ (row.customer_income_range-1)*10000}} ~ {{row.customer_income_range*10000-1 }}</td>
             <td>{{ row.quantity }}</td>
             <td>{{ row.sales }}</td>
         </tr>

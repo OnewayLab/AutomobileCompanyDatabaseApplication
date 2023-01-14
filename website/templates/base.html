@@ -5,10 +5,10 @@
     <h1>汽车公司管理系统</h1>
     <ul>
         {% if g.user %}
-            <li><span>{{ g.user['role'] }}</span>
-            <li><span>{{ g.user['username'] }}</span>
+            <li><span>身份：{{ g.user['role'] }}</span>
+            <li><span>用户名：{{ g.user['username'] }}</span>
             <li><a href="{{ url_for('auth.logout') }}">登出</a>
-            <li><a href="javascript:history.back()">返回</a>
+            <li><a href="{{ request.path.rsplit('/', 1)[0] }}">返回</a>
         {% else %}
         <li><a href="{{ url_for('auth.login') }}">登录</a>
         {% endif %}

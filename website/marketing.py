@@ -43,7 +43,7 @@ def index():
 @login_required
 def bytime():
     error = None
-
+    print(request.path.rsplit('/', 1))
     today = date.today()
     end_year = today.year
 
@@ -156,4 +156,65 @@ def bydealer():
 @bp.route("/bycustomer", methods=("GET", "POST"))
 @login_required
 def bycustomer():
-    pass
+    error = None
+
+    today = date.today()
+    end_year = today.year
+
+    if request.method == "GET":
+        session["bygender_begin_year"] = session["byincome_begin_year"] = today.year - 10
+        session["bygender_begin_month"] = session["byincome_begin_month"] = 1
+        session["bygender_end_year"] = session["byincome_end_year"] = today.year
+        session["bygender_end_month"] = session["byincome_end_month"] = today.month
+    else:
+        type = request.form["by"]
+        session["by"+type+"_begin_year"] = int(request.form["begin_year"])
+        session["by"+type+"_begin_month"] = int(request.form["begin_month"])
+        session["by"+type+"_end_year"] = int(request.form["end_year"])
+        session["by"+type+"_end_month"] = int(request.form["end_month"])
+
+    result_bygender = (
+        db.session.query(
+            Sales.customer_gender,
+            db.func.sum(Sales.quantity).label("quantity"),
+            db.func.sum(Sales.sales).label("sales"),
+        )
+        .filter(
+            Sales.date
+            >= f"{session['bygender_begin_year']}-{session['bygender_begin_month']}-01"
+        )
+        .filter(
+            Sales.date
+            <= f"{session['bygender_end_year']}-{session['bygender_end_month']}-31"
+        )
+        .group_by(Sales.customer_gender)
+        .all()
+    )
+
+    result_byincome = (
+        db.session.query(
+            Sales.customer_income_range,
+            db.func.sum(Sales.quantity).label("quantity"),
+            db.func.sum(Sales.sales).label("sales"),
+        )
+        .filter(
+            Sales.date
+            >= f"{session['byincome_begin_year']}-{session['byincome_begin_month']}-01"
+        )
+        .filter(
+            Sales.date
+            <= f"{session['byincome_end_year']}-{session['byincome_end_month']}-31"
+        )
+        .group_by(Sales.customer_income_range)
+        .all()
+    )
+
+    if error:
+        flash(error)
+
+    return render_template(
+        "marketing/bycustomer.html",
+        end_year=end_year,
+        result_bygender=result_bygender,
+        result_byincome=result_byincome,
+    )
