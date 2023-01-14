@@ -104,7 +104,7 @@ def vehicle_shop():
     )
 
     return render_template(
-        "customer/index.html",
+        "vehicle_shop.html",
         brands=brand_names,
         models=model_names,
         colors=colors,
