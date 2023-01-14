@@ -9,7 +9,7 @@ if __name__ == "__main__":
     app = website.create_app(db)
     import_test_data(
         app,
-        200,
+        500,
         "database/test_data/brand_models.json",
         "database/test_data/customers.json",
         "database/test_data/dealers.json",

@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='narrow.css') }}">
+{% endblock %}
+
 {% block header %}
 <h1>{% block title %}登录{% endblock %}</h1>
 {% endblock %}

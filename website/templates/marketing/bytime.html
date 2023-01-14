@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='wide.css') }}">
+{% endblock %}
+
 {% block header %}
 <h1>{% block title %}汽车销量分析系统-按时间{% endblock %}</h1>
 {% endblock %}
