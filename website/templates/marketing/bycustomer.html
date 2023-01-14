@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}汽车销量分析系统-按顾客类型{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h2>按性别</h2>
+
+<form id="byCostumer" method="post">
+    <input type="hidden" name="by" value="year">
+    <nobr>
+        <text>从</text>
+        <select name="begin_year" id="begin_year" onchange="document.getElementById('byCostumer').submit();">
+            {% for year in range(end_year-10, end_year+1) %}
+                {% if year == session["byyear_begin_year"] %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="begin_year">年</label>
+        <text>到</text>
+        <select name="end_year" id="end_year" onchange="document.getElementById('byCostumer').submit();">
+            {% for year in range(session["byyear_begin_year"], end_year+1) %}
+                {% if year == session["byyear_end_year"] %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="end_year">年</label>
+    </nobr>
+</form>
+
+<table border="1">
+    <tr>
+        <th>年份</th>
+        <th>销量</th>
+        <th>销售额</th>
+    </tr>
+    {% for row in result_byyear %}
+        <tr>
+            <td>{{ row.year }}</td>
+            <td>{{ row.quantity }}</td>
+            <td>{{ row.sales }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+<h2>按月份</h2>
+
+<form id="byMonth" method="post">
+    <input type="hidden" name="by" value="month">
+    <nobr>
+        <text>从</text>
+        <select name="begin_year" id="begin_year" onchange="document.getElementById('byMonth').submit();">
+            {% for year in range(end_year-10, end_year+1) %}
+                {% if year == session["bymonth_begin_year"] %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="begin_year">年</label>
+        <select name="begin_month" id="begin_month" onchange="document.getElementById('byMonth').submit();">
+            {% for month in range(1, 13) %}
+                {% if month == session["bymonth_begin_month"] %}
+                    <option value="{{ month }}" selected>{{ month }}</option>
+                {% else %}
+                    <option value="{{ month }}">{{ month }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="begin_month">月</label>
+        <text>到</text>
+        <select name="end_year" id="end_year" onchange="document.getElementById('byMonth').submit();">
+            {% for year in range(session["byyear_begin_year"], end_year+1) %}
+                {% if year == session["bymonth_end_year"] %}
+                    <option value="{{ year }}" selected>{{ year }}</option>
+                {% else %}
+                    <option value="{{ year }}">{{ year }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="end_year">年</label>
+        <select name="end_month" id="end_month" onchange="document.getElementById('byMonth').submit();">
+            {% for month in range(1, 13) %}
+                {% if month == session["bymonth_end_month"] %}
+                    <option value="{{ month }}" selected>{{ month }}</option>
+                {% else %}
+                    <option value="{{ month }}">{{ month }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+        <label for="end_month">月</label>
+    </nobr>
+</form>
+
+<table border="1">
+    <tr>
+        <th>年份</th>
+        <th>月份</th>
+        <th>销量</th>
+        <th>销售额</th>
+    </tr>
+    {% for row in result_bymonth %}
+        <tr>
+            <td>{{ row.year }}</td>
+            <td>{{ row.month }}</td>
+            <td>{{ row.quantity }}</td>
+            <td>{{ row.sales }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

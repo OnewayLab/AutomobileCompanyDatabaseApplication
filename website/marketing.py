@@ -42,7 +42,66 @@ def index():
 @bp.route("/bytime", methods=("GET", "POST"))
 @login_required
 def bytime():
-    pass
+    error = None
+
+    today = date.today()
+    end_year = today.year
+
+    if request.method == "GET":
+        session["byyear_begin_year"] = session["bymonth_begin_year"] = today.year - 10
+        session["bymonth_begin_month"] = 1
+        session["byyear_end_year"] = session["bymonth_end_year"] = today.year
+        session["bymonth_end_month"] = today.month
+    else:
+        if request.form["by"] == "year":
+            session["byyear_begin_year"] = int(request.form["begin_year"])
+            session["byyear_end_year"] = int(request.form["end_year"])
+        else:
+            session["bymonth_begin_year"] = int(request.form["begin_year"])
+            session["bymonth_begin_month"] = int(request.form["begin_month"])
+            session["bymonth_end_year"] = int(request.form["end_year"])
+            session["bymonth_end_month"] = int(request.form["end_month"])
+
+    result_byyear = (
+        db.session.query(
+            db.extract("year", Sales.date).label("year"),
+            db.func.sum(Sales.quantity).label("quantity"),
+            db.func.sum(Sales.sales).label("sales"),
+        )
+        .filter(Sales.date >= f"{session['byyear_begin_year']}-01-01")
+        .filter(Sales.date <= f"{session['byyear_end_year']}-12-31")
+        .group_by("year")
+        .all()
+    )
+
+    result_bymonth = (
+        db.session.query(
+            db.extract("year", Sales.date).label("year"),
+            db.extract("month", Sales.date).label("month"),
+            db.func.sum(Sales.quantity).label("quantity"),
+            db.func.sum(Sales.sales).label("sales"),
+        )
+        .filter(
+            Sales.date
+            >= f"{session['bymonth_begin_year']}-{session['bymonth_begin_month']}-01"
+        )
+        .filter(
+            Sales.date
+            <= f"{session['bymonth_end_year']}-{session['bymonth_end_month']}-31"
+        )
+        .group_by("year", "month")
+        .all()
+    )
+
+    if error:
+        flash(error)
+
+    return render_template(
+        "marketing/bytime.html",
+        end_year=end_year,
+        result_byyear=result_byyear,
+        result_bymonth=result_bymonth,
+    )
 
 
 @bp.route("/byvehicle", methods=("GET", "POST"))
@@ -57,8 +116,7 @@ def bydealer():
     error = None
 
     today = date.today()
-    years = [y for y in range(today.year - 10, today.year + 1)]
-    months = [m for m in range(1, 13)]
+    end_year = today.year
 
     if request.method == "GET":
         session["begin_year"] = today.year - 10
@@ -90,7 +148,9 @@ def bydealer():
     if error:
         flash(error)
 
-    return render_template("marketing/bydealer.html", result=result, years=years, months=months)
+    return render_template(
+        "marketing/bydealer.html", end_year=end_year, result=result
+    )
 
 
 @bp.route("/bycustomer", methods=("GET", "POST"))
