@@ -23,33 +23,25 @@ def index():
         session["selected_engine"] = None
         session["selected_transmission"] = None
     else:
-        if "brand" in request.form:
-            brand_name = request.form["brand"]
-            if brand_name == "any":
-                session["selected_brand"] = None
-            else:
-                selected_brand = Brand.query.filter_by(name=brand_name).first()
-                session["selected_brand"] = {"bid": selected_brand.bid, "name": selected_brand.name}
-        elif "model" in request.form:
-            model_name = request.form["model"]
-            if model_name == "any":
-                session["selected_model"] = None
-            else:
-                selected_model= Model.query.filter_by(
-                    bid=session["selected_brand"]["bid"], name=model_name
-                ).first()
-                session["selected_model"] = {"mid": selected_model.mid, "name": selected_model.name}
-        elif "color" in request.form:
-            color = request.form["color"]
-            session["selected_color"] = color if color != "any" else None
-        elif "engine" in request.form:
-            engine = request.form["engine"]
-            session["selected_engine"] = engine if engine != "any" else None
-        elif "transmission" in request.form:
-            transmission = request.form["transmission"]
-            session["selected_transmission"] = transmission if transmission != "any" else None
+        print(request.form)
+        if request.form["brand"] == "any":
+            session["selected_brand"] = None
         else:
-            error = "Invalid form."
+            selected_brand = Brand.query.filter_by(name=request.form["brand"]).first()
+            session["selected_brand"] = {"bid": selected_brand.bid, "name": selected_brand.name}
+        if request.form["model"] == "any" or request.form["brand"] == "any":
+            session["selected_model"] = None
+        else:
+            selected_model= Model.query.filter_by(
+                bid=session["selected_brand"]["bid"], name=request.form["model"]
+            ).first()
+            session["selected_model"] = {"mid": selected_model.mid, "name": selected_model.name}
+        color = request.form["color"]
+        session["selected_color"] = color if color != "any" else None
+        engine = request.form["engine"]
+        session["selected_engine"] = engine if engine != "any" else None
+        transmission = request.form["transmission"]
+        session["selected_transmission"] = transmission if transmission != "any" else None
 
     # get brand names
     brands = Brand.query.all()

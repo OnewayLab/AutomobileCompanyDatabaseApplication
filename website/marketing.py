@@ -53,7 +53,27 @@ def byvehicle():
 @bp.route("/bydealer", methods=("GET", "POST"))
 @login_required
 def bydealer():
-    pass
+    error = None
+
+    if request.method == "POST":
+        if "type" in request.form:
+            if request.form["type"] == "time":
+                return redirect(url_for("marketing.bytime"))
+            elif request.form["type"] == "vehicle":
+                return redirect(url_for("marketing.byvehicle"))
+            elif request.form["type"] == "dealer":
+                return redirect(url_for("marketing.bydealer"))
+            elif request.form["type"] == "customer":
+                return redirect(url_for("marketing.bycustomer"))
+            else:
+                error = "Invalid form."
+        else:
+            error = "Invalid form."
+
+    if error:
+        flash(error)
+
+    return render_template("marketing/index.html")
 
 
 @bp.route("/bycustomer", methods=("GET", "POST"))

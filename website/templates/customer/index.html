@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block content %}
-<form id="brandForm" method="post">
+<form id="filter" method="post">
     <nobr>
         <label for="brand">品牌：</label>
-        <select name="brand" id="brand" onchange="document.getElementById('brandForm').submit();">
+        <select name="brand" id="brand" onchange="document.getElementById('filter').submit();">
             <option value="any">任意</option>
             {% for brand in brands %}
                 {% if brand == session["selected_brand"]["name"] %}
@@ -18,13 +18,9 @@
                 {% endif %}
             {% endfor %}
         </select>
-    </nobr>
-</form>
 
-<form id="modelForm" method="post">
-    <nobr>
-        <label for="model">车型：</label>
-        <select name="model" id="model" onchange="document.getElementById('modelForm').submit();" >
+        <label for="model">&nbsp车型：</label>
+        <select name="model" id="model" onchange="document.getElementById('filter').submit();" >
             <option value="any">任意</option>
             {% for model in models %}
                 {% if model == session["selected_model"]["name"] %}
@@ -34,13 +30,9 @@
                 {% endif %}
             {% endfor %}
         </select>
-    </nobr>
-</form>
 
-<form id="colorForm" method="post">
-    <nobr>
-        <label for="color">颜色：</label>
-        <select name="color" id="color" onchange="document.getElementById('colorForm').submit();" >
+        <label for="color">&nbsp颜色：</label>
+        <select name="color" id="color" onchange="document.getElementById('filter').submit();" >
             <option value="any">任意</option>
             {% for color in colors %}
                 {% if color == session["selected_color"] %}
@@ -50,13 +42,9 @@
                 {% endif %}
             {% endfor %}
         </select>
-    </nobr>
-</form>
 
-<form id="engineForm" method="post">
-    <nobr>
-        <label for="engine">引擎：</label>
-        <select name="engine" id="engine" onchange="document.getElementById('engineForm').submit();" >
+        <label for="engine">&nbsp引擎：</label>
+        <select name="engine" id="engine" onchange="document.getElementById('filter').submit();" >
             <option value="any">任意</option>
             {% for engine in engines %}
                 {% if engine == session["selected_engine"] %}
@@ -66,13 +54,9 @@
                 {% endif %}
             {% endfor %}
         </select>
-    </nobr>
-</form>
 
-<form id="transmissionForm" method="post">
-    <nobr>
-        <label for="transmission">变速器：</label>
-        <select name="transmission" id="transmission" onchange="document.getElementById('transmissionForm').submit();" >
+        <label for="transmission">&nbsp变速器：</label>
+        <select name="transmission" id="transmission" onchange="document.getElementById('filter').submit();" >
             <option value="any">任意</option>
             {% for transmission in transmissions %}
                 {% if transmission == session["selected_transmission"] %}
