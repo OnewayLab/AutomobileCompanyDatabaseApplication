@@ -275,26 +275,87 @@ class Inventory(db.Model):
 
 \subsection{用户界面}
 
-\subsection{模块和功能}
+\subsubsection{登陆界面}
 
+如图\ref{fig:登陆界面}所示，用户可以在登陆界面选择身份，并输入用户名和密码进行登录。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/登陆界面.png}
+    \caption{登陆界面}
+    \label{fig:登陆界面}
+\end{figure}
+
+\subsubsection{顾客界面}
+
+如图\ref{fig:顾客界面}所示，顾客可以在顾客界面中根据品牌、车型、颜色、引擎、经销商位置等查找车辆，并查看车辆对应经销商的详细信息。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/顾客界面.png}
+    \caption{顾客界面}
+    \label{fig:顾客界面}
+\end{figure}
+
+\subsubsection{经销商界面}
+
+如图\ref{fig:经销商界面}和图\ref{fig:库存界面}所示，经销商可以在经销商界面中浏览车辆信息，或查看自己库存中的车辆。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/经销商界面.png}
+    \caption{经销商界面}
+    \label{fig:经销商界面}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/库存界面.png}
+    \caption{库存界面}
+    \label{fig:库存界面}
+\end{figure}
+
+\subsubsection{市场部界面}
+
+如图\ref{fig:市场部界面}、\ref{fig:按时间分析销量}等所示，市场部可以在市场部界面中从各种维度对汽车销量进行分析。
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/市场部界面.png}
+    \caption{市场部界面}
+    \label{fig:市场部界面}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/按时间分析销量.png}
+    \caption{按时间分析销量}
+    \label{fig:按时间分析销量}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/按车型分析销量.png}
+    \caption{按车型分析销量}
+    \label{fig:按车型分析销量}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/按客户特征分析销量.png}
+    \caption{按客户特征分析销量}
+    \label{fig:按客户特征分析销量}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/按经销商分析销量.png}
+    \caption{按经销商分析销量}
+    \label{fig:按经销商分析销量}
+\end{figure}
 
 \section{功能展示和测试\label{sec:功能展示和测试}}
 
-\subsection{测试数据生成与导入}
-
-首先，为了使演示更接近真实世界的使用场景，我利用人工智能语言模型 chatGPT 生成了一些品牌、车型、供应商、工厂、经销商和客户信息等，以 json 文件形式放在 ./database/test\_data 下；然后编写了一个 python 程序 ./database/import\_data.py 来根据 json 文件随机生成记录并导入数据库，生成数据时要注意符合完整性约束。
-
-\subsection{查询测试}
-
-通过作业要求中的几个查询，我们可以验证上述数据库设计的合理性和正确性：
-
-\begin{itemize}
-    \item 展示近三年的销量趋势，然后把销量数据分别按买家的性别和年收入分类。
-\end{itemize}
-
-
-
-\subsection{功能测试}
-
+测试过程见演示视频。
 
 \end{document}

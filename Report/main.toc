@@ -13,8 +13,8 @@
 \contentsline {section}{\numberline {3}应用程序设计}{8}{section.3}%
 \contentsline {subsection}{\numberline {3.1}功能概述}{8}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}用户界面}{8}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}模块和功能}{8}{subsection.3.3}%
-\contentsline {section}{\numberline {4}功能展示和测试}{8}{section.4}%
-\contentsline {subsection}{\numberline {4.1}测试数据生成与导入}{8}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}查询测试}{8}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}功能测试}{8}{subsection.4.3}%
+\contentsline {subsubsection}{\numberline {3.2.1}登陆界面}{8}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}顾客界面}{8}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.3}经销商界面}{9}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.4}市场部界面}{9}{subsubsection.3.2.4}%
+\contentsline {section}{\numberline {4}功能展示和测试}{9}{section.4}%
